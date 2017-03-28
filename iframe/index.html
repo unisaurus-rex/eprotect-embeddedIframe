@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>eProtect iFrame Enhancement Historic Version</title>
+  <meta name="description" content="POC for the Litle based">
+  <meta name="author" content="Team Unisaurus Rex">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Browser Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.ico">
+
+</head>
+
+<body>
+  <input type="hidden" id="paypageRegistrationId" name="paypageRegistrationId">
+  <input type="hidden" id="bin" name="bin">
+  <input type="hidden" id="appPath" value="LitlePayPage">
+
+  <form>
+    <div class="positionNumberDiv">
+      <div id="numberDiv" class="numberDiv">
+        <label for="accountnumber">
+          <span id="accountNumberLabelBefore"><a href="#"><i id="numTip" class="fa fa-question-circle tooltip" aria-hidden="true"><span class="tooltiptext"></span></i></a></span>
+          <span id="accountNumberModalBefore"><a class="modals" href="#accountnumberModal" rel="modal:open"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
+          <span id="accountnumberModal" style="display:none;"></span>
+          <span id="accountNumberLabelText">Card number</span>
+        </label>
+        <input type="text" id="accountnumber" name="pan" pattern="[0-9]{13,16}" placeholder="Credit Card Number">
+        <i id="ccicon" class="fa fa-cc-amex" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="positionExpDateDiv">
+      <div id="expDateDiv" class="expDateDiv">
+        <label for="expMonth">
+
+          <span id="expDateLabelBefore"><a href="#"><i id="expTip" class="fa fa-question-circle tooltip" aria-hidden="true"><span class="tooltiptext"></span></i></a></span>
+          <span id="expDateLabelModalBefore"><a class="modals" href="#expDateModal" rel="modal:open"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
+          <span id="expDateModal" style="display:none;"></span>
+          <span id="expDateLabelText">Card Expiration Date</span>
+          <span id="expDateLabelAfter"></span>
+        </label>
+
+        <div id="expSelectDiv">
+          <div id="expMonthDiv">
+            <select name="expMonth" id="expMonth">
+              <option value="01" selected="selected">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div id="expDividerDiv">
+            <span id="expDividerBefore"></span>
+            <span id="expDividerText"> / </span>
+            <span id="expDividerAfter"></span>
+          </div>
+          <div id="expYearDiv">
+            <select name="expYear" id="expYear">      
+              <option value="17">2017</option>
+              <option value="18">2018</option>
+              <option value="19">2019</option>
+              <option value="20">2020</option>
+              <option value="21">2021</option>
+              <option value="22">2022</option>
+              <option value="23">2023</option>
+              <option value="24">2024</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="positionCvvDiv">
+      <div id="cvvDiv" class="cvvDiv">
+        <label for="cvc">
+          <span id="cvvLabelBefore"><a href="#"><i id="cvcTip" class="fa fa-question-circle tooltip" aria-hidden="true"><span class="tooltiptext">
+            <img src="images/amex_front.png" alt="Amex CVC"/>
+            <img src="images/cc_back.png" alt="Amex CVC"/>                
+          </span></i></a></span>
+
+          <span id="cvvLabelModalBefore"><a class="modals" href="#cvvModal" rel="modal:open"><i class="fa fa-question-circle" aria-hidden="true"></i></a></span>
+          <span id="cvvModal" style="display:none;">
+            <img src="images/amex_front.png" alt="Amex CVC"/>
+            <img src="images/cc_back.png" alt="Amex CVC"/>    
+          </span>
+          <span id="cvvLabelText">Security code</span>
+          <span id="cvvLabelAfter"></span>
+        </label>
+        <input type="text" id="cvc" pattern="[0-9]{3,4}" name="cvc" placeholder="CVC">
+      </div>
+    </div>
+
+  </form>
+  
+  <!-- Scripts  ––––––––––––––––––––––––––––––––––––––––––––––––––-->
+  <script type="text/javascript"  src="js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="js/init.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+
+  <!-- Validation Scripts -->
+  <script type="text/javascript" src="js/cvc-validation.js"></script>
+  <script type="text/javascript" src="js/expiration-validation.js"></script>
+  <script type="text/javascript" src="js/pan-validation.js"></script>
+
+  <!-- Validation Utils -->
+  <script type="text/javascript" src="js/formatPan.js"></script>
+
+  <!-- Scripts that use previous scripts -->
+  <script type="text/javascript" src="js/form-ux.js"></script>
+  <script type="text/javascript" src="js/validation-collections.js"></script>
+  
+  <script type="text/javascript" src="js/pan-handlers.js"></script>
+  <script type="text/javascript" src="js/cvc-handlers.js"></script>
+  <script type="text/javascript" src="js/expiration-handlers.js"></script>
+  <script type="text/javascript" src="js/validation-listeners.js"></script>
+
+  <script type="text/javascript" src="js/jquery-modal.min.js"></script>
+
+  <script>
+   init();
+   iconSwitch();
+  </script>
+  <!-- End Document  ––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+</body>
+
+
+</html>
