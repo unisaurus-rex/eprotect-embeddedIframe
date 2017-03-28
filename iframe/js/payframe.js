@@ -111,13 +111,13 @@ var eProtectPayFrame = function () {
     }
 
     var formFields = {
-      "accountNum" : document.getElementById('accountNumber'),
+      "accountNum" : document.getElementById('accountnumber'),
       "paypageRegistrationId" : document
         .getElementById('paypageRegistrationId'),
       "bin" : document.getElementById('bin')
     };
     if (shouldUseCvv) {
-      formFields.cvv2 = document.getElementById('cvv');
+      formFields.cvv2 = document.getElementById('cvc');
     }
 
     var timeout = message.timeout;

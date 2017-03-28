@@ -44,13 +44,18 @@ jQuery(document).ready(function() {
 
   var payframeClient = new LitlePayframeClient(configure);
 
-  window.inputsEmpty = function() {
-    payframeClient.allInputsEmpty();
-  };
-
   // add submit handler
-  $("#regButton").click(function(e) {
-    console.log('button selected');
+  $("#getRegId").click(function(e) {
+    var msg = {
+      id: "1234",
+      orderId: "5678",
+      pciNonSensitive: true
+    };
+    payframeClient.getPaypageRegistrationId(msg);
+  });                           
+
+  $("#emptyInputs").click(function(e) {
     payframeClient.allInputsEmpty();
   });                           
+
 });
