@@ -26,6 +26,25 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
 
+    <!-- Use this style so we don't need t worry auto-detecting height -->
+    <style> 
+     #payframe {
+       position: relative;
+       height: 250px;
+       max-width: 100%;
+       overflow: hidden;
+     }
+
+     iframe[id="vantiv-payframe"] {
+       height: 100%;
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       border: none;
+     }
+    </style>
+
   </head>
 
   <body>
