@@ -281,8 +281,8 @@ var eProtectPayFrame = function () {
     console.log("payframe.js: allInputsEmpty");
 
     // get pan and cvv values and check their length
-    var panValue = $("#accountNumber").val();
-    var cvvValue = $("#cvv").val();
+    var panValue = $("#accountnumber").val();
+    var cvvValue = $("#cvc").val();
     var inputsEmpty = (panValue.length == 0 && cvvValue.length == 0);
 
     // build response
