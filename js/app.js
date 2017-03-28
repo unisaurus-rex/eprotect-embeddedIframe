@@ -42,11 +42,7 @@ jQuery(document).ready(function() {
     },
   };
 
-
-
   var payframeClient = new LitlePayframeClient(configure);
-
-  setTimeout(payframeClient.autoAdjustHeight, 400);
 
   window.inputsEmpty = function() {
     payframeClient.allInputsEmpty();
