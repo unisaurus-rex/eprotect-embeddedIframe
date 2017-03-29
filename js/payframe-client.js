@@ -3,15 +3,13 @@
  * Litle & Co. Pay Fame Java Script API Version: 1.0.1 Copyright © 2003-2015,
  * Litle & Co. ALL RIGHTS RESERVED. Includes payframe-client.js https://www.litle.com
  */
-jQuery(document).ready(function () {
-  console.log("payframe-client.js: ready");
-});
 var configFromMerchant;
 var payframeIsReady = false;
 
 var eventHandler = function (e) {
   "use strict";
   var response = JSON.parse(e.data);
+  console.log("payframe-client event handler: response received");
   console.log(response);
 
   if (response.ready) {
@@ -62,8 +60,6 @@ var LitlePayframeClient = function (configuration) {
 
   return {
     getPaypageRegistrationId : function (message) {
-      console.log("payframe-client.js: getPaypageRegistrationId");
-      console.log(message);
       message.action="getPaypageRegistrationId";
       message.paypageId = configFromMerchant.paypageId;
       message.reportGroup = configFromMerchant.reportGroup;
@@ -73,14 +69,12 @@ var LitlePayframeClient = function (configuration) {
     },
 
     autoAdjustHeight : function () {
-      console.log("payframe-client.js: autoAdjustHeight");
       var message = {"action":"getDocHeight"};
       var payframe = document.getElementById("vantiv-payframe").contentWindow;
       payframe.postMessage(JSON.stringify(message), "*");
     },
 
     allInputsEmpty: function() {
-      console.log("payframe-client.js: allInputsEmpty");
       var message = {"action":"allInputsEmpty"};
       var payframe = document.getElementById("vantiv-payframe").contentWindow;
       payframe.postMessage(JSON.stringify(message), "*");

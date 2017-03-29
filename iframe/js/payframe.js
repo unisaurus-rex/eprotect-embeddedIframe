@@ -6,7 +6,6 @@
  * Litle & Co. ALL RIGHTS RESERVED. Includes payframe.js https://www.litle.com
  */
 $( document ).ready(function() {
-  console.log("payframe.js: ready");
   //Remove error handling classes on focus
   $("#accountNumber").focus(function() {
     $(".numberDiv").removeClass("error error-871 error-872 error-874 error-876");
@@ -24,7 +23,6 @@ $( document ).ready(function() {
     }
   });
   jQuery(document).click(function(event) {
-    console.log("payframe.js: click");
     var title=jQuery(".title");
     if(title.length) {
       title.remove();
@@ -36,7 +34,6 @@ var eProtectPayFrame = function () {
   var shouldUseCvv = false;
 
   var submitAfterCall = function (response) {
-    console.log("payframe.js: submitAfterCall");
     response.expMonth = jQuery("#expMonth").val();
     response.expYear = jQuery("#expYear").val();
     $("#cvv").val("XXX");
@@ -44,7 +41,6 @@ var eProtectPayFrame = function () {
   };
 
   var onErrorAfterCall = function (response) {
-    console.log("payframe.js: onErrorAfterCall");
     var errorCode = response.response;
     /*
       "871" : "Account number not mod10",
@@ -91,13 +87,10 @@ var eProtectPayFrame = function () {
 
   var onTimeoutAfterCall = function () {
     var response = {timeout : true };
-    console.log("payframe.js: onTimeoutAfterCall");
     window.parent.postMessage(JSON.stringify(response), '*');
   };
 
   var getPaypageRegistrationId = function (message) {
-    console.log("payframe.js: getPaypageRegistrationId");
-    console.log(message);
     var eProtectRequest = {
       "paypageId" : message.paypageId,
       "reportGroup" : message.reportGroup,
@@ -135,8 +128,6 @@ var eProtectPayFrame = function () {
   };
 
   var showCvv = function (message) {
-    console.log("payframe.js: showCvv");
-    console.log(message);
     if (message) {
       jQuery(".cvvDiv").show();
       shouldUseCvv = true;
@@ -147,8 +138,6 @@ var eProtectPayFrame = function () {
   };
 
   var setMonths = function (message) {
-    console.log("payframe.js: setMonths");
-    console.log(message);
     var months = message;
     jQuery("#expMonth")[0][0].text = months['1'];
     jQuery("#expMonth")[0][1].text = months['2'];
@@ -165,8 +154,6 @@ var eProtectPayFrame = function () {
   };
 
   var setYears = function (message) {
-    console.log("payframe.js: setYears");
-    console.log(message);
     var numYearsToAdd = message;
 
     var numOfYearsToRemove = jQuery("#expYear option").size();
@@ -205,13 +192,11 @@ var eProtectPayFrame = function () {
   //    }
 
   var setTooltipText = function (message) {
-    console.log("payframe.js: setTooltipText");
     var text = message;
     //text = removeTags(text);
     jQuery(".tooltip").attr("title", text);
     jQuery(".tooltip").attr("style","");
     jQuery(".tooltip").click(function(event) {
-      console.log("payframe.js: click");
       var title=jQuery(".title");
       var cvvDiv=jQuery(".cvvDiv");
       if(!title.length) {
@@ -228,8 +213,6 @@ var eProtectPayFrame = function () {
   };
 
   var setTabIndex = function (message) {
-    console.log("payframe.js: setTabIndex");
-    console.log(message);
     if(message.cvv) {
       $("#cvv").attr("tabindex",message.cvv);
     }
@@ -245,8 +228,6 @@ var eProtectPayFrame = function () {
   };
 
   var setPlaceholderText = function(message) {
-    console.log("payframe.js: setPlaceholderText");
-    console.log(message);
     if(message.cvv) {
       $("#cvv").attr("placeholder",message.cvv);
     }
@@ -278,7 +259,6 @@ var eProtectPayFrame = function () {
    * if pan and cvv are empty, post a message with value of true, otherwise post value of false
    */
   var allInputsEmpty = function() {
-    console.log("payframe.js: allInputsEmpty");
 
     // get pan and cvv values and check their length
     var panValue = $("#accountnumber").val();
@@ -301,10 +281,7 @@ var eProtectPayFrame = function () {
 
   return {
     receivedMessageFromOuterFrame : function (message) {
-      console.log("payframe.js: receivedMessageFromOuterFrame");
-      console.log(message);
       var action = message.action;
-      console.log("payframe.js: action: " + action);
       if (action === "getPaypageRegistrationId") {
         getPaypageRegistrationId(message);
       } else if (action === "configure") {
@@ -341,7 +318,6 @@ var eProtectPayFrame = function () {
 var epFrame = new eProtectPayFrame();
 
 var eventHandler = function (event) {
-  console.log(event.data);
   var messageAsString = event.data;
   var jsonPath = '/' + $("#appPath").val() + '/js/json2-20140404.min.js';
   yepnope({
