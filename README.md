@@ -4,7 +4,7 @@ This project displays a sample form containing an embedded iframe. Any calls to 
 ## Test error classes
 Test the behavior of the page if an error class is returned after calling ```LitlePayframeClient.getPaypageRegistrationId()```
 
-Entering one of the following numeric codes in the Account Number field will cause the corresponding error class to be added to the form (ie. entering '871' will cause the ```error-871``` class to be added to the form).
+Entering one of the following numeric codes in the Account Number field will cause the corresponding error class to be added to the form after clicking the 'Get Registration ID' button (ie. entering '871' will cause the ```error-871``` class to be added to the form).
 - 871
 - 872
 - 874
@@ -24,4 +24,4 @@ You may query the iframe to determine if the inputs are empty. For this to work,
 ```
 3) Add the callback handler to the config object passed to ```LitlePayframeClient```
 
-See ```js/app.js``` for an example. Currently the emptyInputs response is logged to the console.
+See ```js/app.js``` for an example. Currently the emptyInputs response is logged to the console after clicking the 'Check For Empty Inputs' button.
