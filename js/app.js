@@ -1,11 +1,5 @@
 jQuery(document).ready(function() {
   console.log('app js: ready');
-  var eventHandler = function (e) {
-    "use strict";
-    var response = JSON.parse(e.data);
-    console.log("custom callback");
-    console.log(response);
-  }
   
   function payframeClientCallback(res) {
     console.log("payframe client callback: message received");
@@ -15,12 +9,13 @@ jQuery(document).ready(function() {
   function inputsEmptyCallback(res) {
     console.log("inputsEmptyCallback: message received");
     console.log(res);
-    var isEmpty = JSON.parse(res).allInputsEmpty;
+    var isEmpty = res.allInputsEmpty;
     if(isEmpty) {
       console.log("Card input fields empty");
+      // do other stuff as needed
     } else {
-      var msg = {id: "1234", orderId: "5678"};
-      payframeClient.getPaypageRegistrationId(msg);
+      console.log("Card inputs not empty");
+      // do other stuff as needed
     }
   }
 
@@ -44,7 +39,7 @@ jQuery(document).ready(function() {
 
   var payframeClient = new LitlePayframeClient(configure);
 
-  // add submit handler
+  // add button click handlers 
   $("#getRegId").click(function(e) {
     var msg = {
       id: "1234",

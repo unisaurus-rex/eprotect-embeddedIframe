@@ -22,7 +22,7 @@ var eventHandler = function (e) {
     var iframe = document.getElementById("vantiv-payframe");
     iframe.height = response.height;
   }
-  else if (response.inputsEmpty) {
+  else if (response.hasOwnProperty("allInputsEmpty")) {
     configFromMerchant.inputsEmptyCallback(response);
   } else {
     configFromMerchant.callback(response);
@@ -30,56 +30,56 @@ var eventHandler = function (e) {
 };
 
 if (window.addEventListener) {
-  window.addEventListener("message", eventHandler, false);
+window.addEventListener("message", eventHandler, false);
 } else if (window.attachEvent) {
-  window.attachEvent("onmessage", eventHandler);
+window.attachEvent("onmessage", eventHandler);
 }
 
 var LitlePayframeClient = function (configuration) {
-  "use strict";
+"use strict";
 
-  if(configuration.htmlTimeout) {
-    setTimeout(function() {
-      if (payframeIsReady === false) {
-        var error = {
-          "response":"884",
-          "message":"PayFrame HTML failed to load"
-        };
-        configFromMerchant.callback(error);
-      }
-    }, configuration.htmlTimeout);
-  }
+if(configuration.htmlTimeout) {
+setTimeout(function() {
+if (payframeIsReady === false) {
+var error = {
+"response":"884",
+"message":"PayFrame HTML failed to load"
+};
+configFromMerchant.callback(error);
+}
+}, configuration.htmlTimeout);
+}
 
-  configFromMerchant = configuration;
-  var div = configFromMerchant.div;
-  var paypageId = configFromMerchant.paypageId;
-  var style = configFromMerchant.style;
-  var height = configFromMerchant.height;
-  var apiVersion = "api2"
-  jQuery("#"+div).html("<iframe id='vantiv-payframe' name='vantiv-payframe' frameborder='0' src='iframe/index.html' height='"+height+"' width='100%'></iframe>");
+configFromMerchant = configuration;
+var div = configFromMerchant.div;
+var paypageId = configFromMerchant.paypageId;
+var style = configFromMerchant.style;
+var height = configFromMerchant.height;
+var apiVersion = "api2"
+jQuery("#"+div).html("<iframe id='vantiv-payframe' name='vantiv-payframe' frameborder='0' src='iframe/index.html' height='"+height+"' width='100%'></iframe>");
 
-  return {
-    getPaypageRegistrationId : function (message) {
-      message.action="getPaypageRegistrationId";
-      message.paypageId = configFromMerchant.paypageId;
-      message.reportGroup = configFromMerchant.reportGroup;
-      message.timeout = configFromMerchant.timeout;
-      var payframe = document.getElementById("vantiv-payframe").contentWindow;
-      payframe.postMessage(JSON.stringify(message), "*");
-    },
+return {
+getPaypageRegistrationId : function (message) {
+message.action="getPaypageRegistrationId";
+message.paypageId = configFromMerchant.paypageId;
+message.reportGroup = configFromMerchant.reportGroup;
+message.timeout = configFromMerchant.timeout;
+var payframe = document.getElementById("vantiv-payframe").contentWindow;
+payframe.postMessage(JSON.stringify(message), "*");
+},
 
-    autoAdjustHeight : function () {
-      var message = {"action":"getDocHeight"};
-      var payframe = document.getElementById("vantiv-payframe").contentWindow;
-      payframe.postMessage(JSON.stringify(message), "*");
-    },
+autoAdjustHeight : function () {
+var message = {"action":"getDocHeight"};
+var payframe = document.getElementById("vantiv-payframe").contentWindow;
+payframe.postMessage(JSON.stringify(message), "*");
+},
 
-    allInputsEmpty: function() {
-      var message = {"action":"allInputsEmpty"};
-      var payframe = document.getElementById("vantiv-payframe").contentWindow;
-      payframe.postMessage(JSON.stringify(message), "*");
-    }
-  };
+allInputsEmpty: function() {
+var message = {"action":"allInputsEmpty"};
+var payframe = document.getElementById("vantiv-payframe").contentWindow;
+payframe.postMessage(JSON.stringify(message), "*");
+}
+};
 };
 
 /*!json2.js*/

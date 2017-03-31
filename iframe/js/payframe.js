@@ -263,7 +263,7 @@ var eProtectPayFrame = function () {
     // get pan and cvv values and check their length
     var panValue = $("#accountnumber").val();
     var cvvValue = $("#cvc").val();
-    var inputsEmpty = (panValue.length == 0 && cvvValue.length == 0);
+    var inputsEmpty = (panValue.length === 0 && cvvValue.length === 0);
 
     // build response
     var response = {"allInputsEmpty" : inputsEmpty}; 
@@ -277,7 +277,7 @@ var eProtectPayFrame = function () {
         window.parent.postMessage(JSON.stringify(response), '*');
       }
     });
-  }
+  };
 
   return {
     receivedMessageFromOuterFrame : function (message) {
@@ -318,20 +318,20 @@ var eProtectPayFrame = function () {
 var epFrame = new eProtectPayFrame();
 
 var eventHandler = function (event) {
-  var messageAsString = event.data;
-  var jsonPath = '/' + $("#appPath").val() + '/js/json2-20140404.min.js';
-  yepnope({
-    test : window.JSON,
-    nope : [ jsonPath ],
-    complete : function () {
-      var message = JSON.parse(messageAsString);
-      epFrame.receivedMessageFromOuterFrame(message);
-    }
-  });
+var messageAsString = event.data;
+var jsonPath = '/' + $("#appPath").val() + '/js/json2-20140404.min.js';
+yepnope({
+test : window.JSON,
+nope : [ jsonPath ],
+complete : function () {
+var message = JSON.parse(messageAsString);
+epFrame.receivedMessageFromOuterFrame(message);
+}
+});
 };
 
 if (window.addEventListener) {
-  window.addEventListener("message", eventHandler, false);
+window.addEventListener("message", eventHandler, false);
 } else if (window.attachEvent) {
-  window.attachEvent("onmessage", eventHandler);
+window.attachEvent("onmessage", eventHandler);
 }
